@@ -1,0 +1,89 @@
+<html xmlns:th="http://WWW.thymeLeaf.org">
+	<head>
+		<title>Search Result</title>
+		<link rel="stylesheet" type="text/css" href="/css/home.css">
+		<style>
+			.eachrow {
+            font-family: Arial, sans-serif;
+            background-color:black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+          
+          .movie-card {
+            width: 250px;
+            height: 490px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+          }
+      
+          .movie-image {
+            width:max-content;
+            height: 300px;
+            padding: 23px;
+            justify-items: center;
+            object-fit: cover;
+          }
+      
+          .movie-details {
+            padding: 15px;
+          }
+      
+          .movie-title {
+            font-size: 1.25em;
+            font-family:cursive;
+            font-weight: bold;
+            font-weight:bold;
+            margin: 0;
+          }
+      
+          .director {
+            font-size: 1em;
+            margin: 5px 0;
+          }
+      
+          .year {
+            font-size: 0.9em;
+            color: #777;
+          }
+      
+          .rating {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #f39c12;
+          }
+		</style>
+	</head>
+	
+	<body style="background-color: black;">
+		
+		<h2 style="color: crimson;">Search Results.....</h2>
+		<br>
+		
+	  <div class="eachrow">
+		  
+         <div class="movie-card" th:each="result : ${searchResult}">
+			 
+			 <img th:src="${result.getPath()}" th:alt="${result.getMoviename()}" class="movie-image">
+			 
+            <div class="movie-details">
+				
+              <a th:href="@{${'/movie/' + result.getMoviename()}}"><h3 class="movie-title" th:text="${result.getMoviename()}">Movie 1</h3></a> 
+              <p class="director" th:text="${result.getDirector()}">Director: Director 1</p>
+              <p class="year" th:text="${result.getYear()}">Year: 2023</p>
+              <p class="rating" th:text="${result.getRating()}">Rating: 4.5</p>
+              
+            </div>
+            
+		 </div>
+            
+      </div>
+		
+		
+		
+	</body>
+</html>

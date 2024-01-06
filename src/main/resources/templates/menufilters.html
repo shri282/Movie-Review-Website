@@ -1,0 +1,87 @@
+<html xmlns:th="http://WWW.thymeLeaf.org">
+	<head>
+		<title th:text="${filter}">
+			
+		</title>
+		<style>
+			.eachrow {
+            font-family: Arial, sans-serif;
+            background-color:black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+          
+          .movie-card {
+            width: 250px;
+            height: 490px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+          }
+      
+          .movie-image {
+            width:max-content;
+            height: 300px;
+            padding: 23px;
+            justify-items: center;
+            object-fit: cover;
+          }
+      
+          .movie-details {
+            padding: 15px;
+          }
+      
+          .movie-title {
+            font-size: 1.25em;
+            font-family:cursive;
+            font-weight: bold;
+            font-weight:bold;
+            margin: 0;
+          }
+      
+          .director {
+            font-size: 1em;
+            margin: 5px 0;
+          }
+      
+          .year {
+            font-size: 0.9em;
+            color: #777;
+          }
+      
+          .rating {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #f39c12;
+          }
+		</style>
+	</head>
+	<body>
+		
+		<h2 th:text="${filter}" style="font-size: larger; font-style: italic; color: #f39c12; padding-left: 20px; background-color: black;">default</h2>
+		
+		<div class="eachrow">
+		  
+         <div class="movie-card" th:each="movie : ${movies}">
+			 
+			 <img th:src="${movie.getPath()}" th:alt="${movie.getMoviename()}" class="movie-image">
+			 
+            <div class="movie-details">
+				
+              <a th:href="@{${'/movie/' + movie.getMoviename()}}"><h3 class="movie-title" th:text="${movie.getMoviename()}">Movie 1</h3></a> 
+              <p class="director" th:text="${movie.getDirector()}">Director: Director 1</p>
+              <p class="year" th:text="${movie.getYear()}">Year: 2023</p>
+              <p class="rating" th:text="${movie.getRating()}">Rating: 4.5</p>
+              
+            </div>
+            
+		 </div>
+            
+      </div>
+		
+		
+	</body>
+</html>
