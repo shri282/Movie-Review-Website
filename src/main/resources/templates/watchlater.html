@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watch Later Page</title>
+    <link rel="stylesheet" type="text/css" href="/css/wl.css">
+</head>
+<body>
+    <div th:replace="~{fragments/index :: header}"></div>
+
+   <div class="center-container">
+    <div class="content">
+        <h3>Your WatchList</h3>
+        
+        <table>
+            <thead>
+                <th>No</th>
+                <th>Movie Name</th>
+                <th>Release Year</th>
+                <th>Director</th>
+                <th>Ratings</th>
+                <th>Link to Watch</th>
+                <th>Delete</th>
+            </thead>
+            
+            <tr th:each="wl,wlindex : ${wls}">
+                <td th:text="${wlindex.count}">1</td>
+                <td th:text="${wl.getMovie().getMoviename()}">Avengers</td>
+                <td th:text="${wl.getMovie().getYear()}">2011</td>
+                <td th:text="${wl.getMovie().getDirector()}">James</td>
+                <td th:text="${wl.getMovie().getRating()}">9.8</td>
+                <td><a href="http://hjk/kkk" target="_blank">Watch Now</a></td>
+                <td><button class="removebutton" th:attr="data-wl-id=${wl.getId()}">Remove</button></td>
+            </tr>
+        </table>
+    </div>
+   </div> 
+   <script type="text/javascript" src="/script/wl.js"></script>
+</body>
+</html>

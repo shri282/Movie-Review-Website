@@ -1,0 +1,121 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Page</title>
+    <link rel="stylesheet" href="/css/admin.css">   
+</head>
+<body>
+
+<div>
+    <h3>View All Movie</h3>
+    <button id="viewDetailsBtn" onclick="fetchMovieDetails()">Movie Details</button>
+</div>
+
+<div id="movieDetailsDiv" style="display: none;">
+    <h3>All Movies</h3>
+    <ul id="movieList"></ul>
+</div>
+
+<h3>Delete a Movie</h3>
+
+<div>
+    <label>Input Movie Id to delete</label>
+    <input type="number" id="deleteMovieId" placeholder="movie id">
+    <button onclick="deleteMovie()">Delete</button>
+</div>
+
+<h3>Show all Deleted Movies</h3>
+
+<div>
+    <button onclick="showDeletedMovies()">DeleteMovies</button>
+</div>
+
+<div id="deletedmovieDiv" style="display: none;">
+    <h3>All Movies</h3>
+    <ul id="deletedmovieList"></ul>
+</div>
+
+
+<h3>Retrive Deleted Movies</h3>
+
+<div>
+	<label>Input Movie Id to Retrive</label>
+    <input type="number" id="deletedMovieId" placeholder="movie id">
+    <button onclick="retriveMovie()">Retrive</button>
+</div>
+
+<div>
+    <h3>Add a Movie</h3>
+
+    <label>Input moviename</label>
+    <input type="text" id="movieName" placeholder="moviename"><br>
+    <label>Input description</label>
+    <input type="text" id="description" placeholder="description"><br>
+    <label>Input director</label>
+    <input type="text" id="director" placeholder="director"><br>
+    <label>Input year</label>
+    <input type="text" id="year" placeholder="year"><br>
+    <label>Input rating</label>
+    <input type="number" id="rating" placeholder="rating"><br>
+    <label>Input path</label>
+    <input type="text" id="path" placeholder="path"><br>
+    <label>Input genre</label>
+    <input type="text" id="genre" placeholder="genre"><br>
+    <label>Input trailerlink</label>
+    <input type="text" id="trailerLink" placeholder="trailerlink"><br>
+    <label>Input slidepath</label>
+    <input type="text" id="slidePath" placeholder="slidepath"><br>
+    <button onclick="addMovie()">ADD MOVIE</button>
+</div>
+
+<div hidden class="constrints" id="constdiv">
+	
+</div>
+
+<div>
+		<label>Update Movie</label>
+	    <label>Input Id of the movie you want to update</label>
+	    <input type="number" placeholder="Enter the movie Id" id="updatemovieid">
+	    <select id="optionselected">
+		    <option value="moviename">moviename</option>
+		    <option value="description">description</option>
+		    <option value="director">director</option>
+		    <option value="year">year</option>
+		    <option value="rating">rating</option>
+		    <option value="path">path</option>
+		    <option value="genre">genre</option>
+		    <option value="trailerlink">trailerlink</option>
+		    <option value="slidepath">slidepath</option>
+	    </select>
+	    <input type="text" id="updatevalue">
+	    <button onclick="updatemoviebyid()">Update Movie</button>
+</div>
+
+<div th:if="${role == 1 && superadmin == true}">
+	<div id="showadmins">
+		<button onclick="showadmins()">Show admins</button>
+	</div>
+	<div id="showadminvalues">
+		<h3>All Admins</h3>
+		<ul id="adminlist"></ul>
+	</div>
+	<div id="addadmin">
+		<label>Enter username</label>
+		<input type="text" placeholder="username" id="adminusernamevalue">
+		<label>Enter email</label>
+		<input type="text" placeholder="email" id="adminemailvalue">
+		<button onclick="addadmin()">ADD ADMIN</button>
+	</div>
+	
+	<div id="deleteadmin">
+		<label>enter authorized admin id</label>
+		<input type="number" placeholder="ID" id="adminid">
+        <button onclick="deleteadmin()">DELETE ADMIN</button>
+	</div>
+	
+	
+</div>	
+
+<script src="/script/admin.js"></script>
+		
+	</body>
+</html>	

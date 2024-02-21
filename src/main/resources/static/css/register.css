@@ -1,0 +1,77 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #ff6b6b, #6078ea);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.registration-container {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    width: 400px;
+    text-align: center;
+    padding: 20px;
+}
+
+.registration-form {
+    margin: 0;
+    padding: 0;
+}
+
+
+.registration-form h2 {
+    color: #333;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+}
+
+.input-container {
+    text-align: left;
+    margin: 0 0 20px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    font-size: 14px;
+    color: #333;
+    text-transform: uppercase;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+    width: 95%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+    margin-top: 5px;
+}
+
+button {
+    width: 90%;
+    padding: 12px;
+    background: linear-gradient(135deg, #ff6b6b, #6078ea);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 16px;
+    margin-top: 20px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ff475d, #485fe8);
+}

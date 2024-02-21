@@ -1,0 +1,139 @@
+<html xmlns:th="http://WWW.thymeLeaf.org">
+	<head>
+		
+		<title>home</title>
+		
+        
+        <link rel="stylesheet" type="text/css" href="/css/home.css">
+        <style>
+			.eachrow {
+            font-family: Arial, sans-serif;
+            background-color:black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+          }
+          
+          .movie-card {
+            width: 250px;
+            height: 550px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+          }
+      
+          .movie-image {
+            width:max-content;
+            height: 300px;
+            padding: 23px;
+            justify-items: center;
+            object-fit: cover;
+          }
+      
+          .movie-details {
+            padding: 15px;
+          }
+      
+          .movie-title {
+            font-size: 1.25em;
+            font-family:cursive;
+            font-weight: bold;
+            font-weight:bold;
+            margin: 0;
+          }
+      
+          .director {
+            font-size: 1em;
+            margin: 5px 0;
+          }
+      
+          .year {
+            font-size: 0.9em;
+            color: #777;
+          }
+      
+          .rating {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #f39c12;
+          }
+          
+          .watch-later {
+			    padding: 10px 20px;
+			    font-size: 16px;
+			    font-weight: bold;
+			    color: #fff;
+			    background-color: #3498db;
+			    border: none;
+			    border-radius: 5px;
+			    cursor: pointer;
+			    transition: background-color 0.3s ease;
+            }
+
+			.watch-later:hover {
+			    background-color: #2980b9;
+			}
+			
+			.watch-later:focus {
+			    outline: none;
+			}
+		</style>
+        
+	</head>
+	<body style="padding: 0; margin: 0;">
+		
+		<div th:replace="~{fragments/index :: header}"></div>
+		
+	  <div th:if="${role == 1 && superadmin == false}">
+		 <h3 style="text-align: center; color: darkgray; margin-top: 0; margin-bottom: 0;">Welcome Admin</h3>
+	  </div>
+	  
+	  <div th:if="${role == 1 && superadmin == true}">
+		 <h3 style="text-align: center; color: darkgray; margin-top: 0; margin-bottom: 0;">Welcome SuperAdmin</h3>
+	  </div>	
+		 
+      <div class="movie-slider">
+        <h2>Top Movies</h2>
+        
+        <div class="slider-container"> 
+         
+			 <div class="movie-slide" th:each="topmovie : ${topmovies}" >
+                <img th:src="${topmovie.getSlidepath()}" th:alt="${topmovie.getMoviename()}"> 
+                <a th:href="@{${'/movie/' + topmovie.getMoviename()}}" class="topmovieslink"><p th:text="${topmovie.getMoviename()}">Man Of Steal</p></a>
+            </div>
+      
+        </div>
+        
+        <button class="prev-slide" onclick="prevSlide()">&#9664;</button>
+        <button class="next-slide" onclick="nextSlide()">&#9654;</button>
+        
+    </div>
+
+      <h1 style="font-size: larger; font-style: italic; color: #f39c12; padding-left: 20px; background-color: black;">All Movies</h1>
+      
+      <div class="eachrow">
+		  
+         <div class="movie-card" th:each="mv : ${mvs}">
+			 
+			 <img th:src="${mv.getPath()}" th:alt="${mv.getMoviename()}" class="movie-image">
+			 
+            <div class="movie-details">
+				
+              <a th:href="@{${'/movie/' + mv.getMoviename()}}"><h3 class="movie-title" th:text="${mv.getMoviename()}">Movie 1</h3></a> 
+              <p class="director" th:text="${mv.getDirector()}">Director: Director 1</p>
+              <p class="year" th:text="${mv.getYear()}">Year: 2023</p>
+              <p class="rating" th:text="${mv.getRating()}">Rating: 4.5</p>
+              <button class="watch-later">Watch Later</button>
+              
+            </div>
+            
+		 </div>
+            
+      </div>
+
+	</body>
+	<script type="text/javascript" src="/script/home.js"></script>
+	
+</html>

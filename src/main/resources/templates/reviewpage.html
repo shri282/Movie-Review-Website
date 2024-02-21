@@ -1,0 +1,129 @@
+<html xmlns:th="http://WWW.thymeLeaf.org">
+	<head>
+		<title th:title="${moviename}"></title>
+		<link rel="stylesheet" type="text/css" href="/css/review.css">
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	    
+	</head>
+	
+	<body>
+		<div th:replace="~{fragments/index :: header}"></div>
+		
+  <h1>Movie Review</h1>
+
+  <div class="video-container" th:utext="${trailer}">
+   
+  </div>
+
+  <h3 th:text="${moviename}" class="movie-name">movie name</h3>
+  
+  <div>
+	  <p th:text="${movieshortline}"></p>
+  </div>
+  
+  
+  <div class="review-container">
+    <h2 class="director"><p th:text="${director}">director name</p></h2>
+    <h2 class="year"><p th:text="${year}">release year</p></h2>
+    <h2 class="ratings"><p th:text="${rating}">rating</p></h2>
+  </div>
+  
+  
+  
+ <div class="star-rating" role="radiogroup" aria-label="Movie rating">
+  <input type="radio" name="rating" value="5" id="star5" aria-checked="false" aria-label="5 stars">
+  <label for="star5">★★★★★</label>
+  <input type="radio" name="rating" value="4" id="star4" aria-checked="false" aria-label="4 stars">
+  <label for="star4">★★★★☆</label>
+  <input type="radio" name="rating" value="3" id="star3" aria-checked="false" aria-label="3 stars">
+  <label for="star3">★★★☆☆</label>
+  <input type="radio" name="rating" value="2" id="star2" aria-checked="false" aria-label="2 stars">
+  <label for="star2">★★☆☆☆</label>
+  <input type="radio" name="rating" value="1" id="star1" aria-checked="false" aria-label="1 star">
+  <label for="star1">★☆☆☆☆</label>
+</div>
+
+
+<div class="comment-box">
+  <textarea name="comment" placeholder="Write your review here..."></textarea>
+  <button type="submit">Submit Review</button>
+</div>
+
+
+<div class="other-comments">
+  <h2>Other's review</h2>
+  <ul class="comments">
+    <li th:each="review : ${reviews}">
+		
+		<div th:if="${review.getUser() == currentuser}" th:id="'review_' + ${review.getId()}">
+			  <span class="reviewer" th:text="${review.getUser().getUsername() +':'}"></span>
+		      <span class="rating" th:switch="${review.getStar()}">
+		          <span class="rating" th:case="1">★</span>
+		          <span class="rating" th:case="2">★★</span>
+		          <span class="rating" th:case="3">★★★</span>
+		          <span class="rating" th:case="4">★★★★</span>
+		          <span class="rating" th:case="5">★★★★★</span>
+		      </span>   
+		      <p th:text="${review.getReview()}"></p>
+		      <span th:text="${review.getTimestamp()}"></span> <br>
+		      
+		      <span style="color: darkgoldenrod;">Delete Review :</span>
+		      <button th:attr="onclick='javascript:deleteReview(\'' + ${review.getId()} + '\')'"  name="deletereview" class="deletebutton">
+				  <img src="/images/deleteicon.jpg" class="dustbin">
+			  </button>
+			   
+			 <ul class="replies">
+				 <h4>replies : </h4>
+		         <li th:each="reply : ${replys.get(review.getId()) == null ? emptyreplys : replys.get(review.getId())}">
+		             <!-- Display reply content here -->
+		             <span class="reviewer" th:text="${reply.getUser().getUsername() +':'}">shri :</span>
+		             <p class="reply-text" th:text="${reply.getReply()}"></p>
+		             <span class="reply-timestamp" th:text="${reply.getTimestamp()}"></span>
+		         </li>
+		      </ul>
+		      
+		</div>	
+	
+		<div th:unless="${review.getUser() == currentuser}">
+			  <span class="reviewer" th:text="${review.getUser().getUsername() +':'}"></span>
+		      <span class="rating" th:switch="${review.getStar()}">
+		          <span class="rating" th:case="1">★</span>
+		          <span class="rating" th:case="2">★★</span>
+		          <span class="rating" th:case="3">★★★</span>
+		          <span class="rating" th:case="4">★★★★</span>
+		          <span class="rating" th:case="5">★★★★★</span>
+		      </span>   
+		      <p th:text="${review.getReview()}"></p>
+		      <span th:text="${review.getTimestamp()}"></span> <br>
+		      
+		      <!-- Display reply input box when "Reply" button is clicked -->
+			  <button class="toggle-reply-form">Reply</button>
+			
+			    <!-- Reply form (initially hidden) -->
+			  <div class="reply-form" style="display: none;">
+			       <input type="hidden" name="reviewId" th:value="${review.getId()}">
+			       <input type="hidden" name="moviename" th:value="${moviename}">
+			       <input type="text" name="replyText" placeholder="Write your reply here...">
+			       <button class="submitreply">Reply</button>
+			  </div>
+
+		      <!-- Display all replies for the current review -->
+		      <ul class="replies">
+				  <h4>replies : </h4>
+		         <li th:each="reply : ${replys.get(review.getId()) == null ? emptyreplys : replys.get(review.getId())}">
+		             <!-- Display reply content here -->
+		             <span class="reviewer" th:text="${reply.getUser().getUsername() +':'}">shri :</span>
+		             <p class="reply-text" th:text="${reply.getReply()}"></p>
+		             <span class="reply-timestamp" th:text="${reply.getTimestamp()}"></span>
+		         </li>
+		      </ul>
+		</div> 	
+    </li>
+  </ul>
+</div>
+		<br><br><br>
+		<script type="text/javascript" src="/script/review.js"></script>
+	</body>
+	
+	
+</html>

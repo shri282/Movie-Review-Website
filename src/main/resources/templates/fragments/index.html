@@ -1,0 +1,90 @@
+<html xmlns:th="http://WWW.thymeLeaf.org">
+	<head>
+		<title>index</title>
+		
+	</head>
+	<body>
+		<div th:text="${pageTitle}" >
+			<header>
+				<link rel="stylesheet" type="text/css" th:href="@{/css/index.css}"/>
+				
+	        <div class="header-container">
+				
+	        <div class="logo">
+                <a href="/"><img src="/images/imbdcut.jpg" alt="IMDb Logo"></a>
+            </div>
+
+            <nav>
+                <div class="dropdown">
+                    <button class="dropbtn">Menu</button>
+                    <div class="dropdown-content">
+                        <a href="/menu/allmovies">All Movies</a>
+                        <a href="/menu/topmovies">Top Movies</a>
+                        <a href="/menu/fantasy">Fantasy Movies</a>
+                        <a href="/menu/thriller">Thriller Movies</a>
+                        <a href="/menu/action">Action Movies</a>
+                        <a href="/menu/sifi">Si-fi Movies</a>
+                        <a href="/menu/romcom">RomCom Movies</a>
+                        <a href="/menu/adultcomedy">Adult-Comedy Movies</a>
+                    </div>
+                </div>
+            </nav>
+
+            <div class="link2">
+				<a href="#">Tv Shows</a>
+			</div>
+			
+			<div th:if="${role == 1}" class="auth-on">
+				<a href="/admin/">ADMIN PANEL</a>
+			</div>
+	            
+	        <div class="search-box">
+				<form action="/search" method="get">
+                    <select class="select-space" id="search-category" name="search-category" onchange="adjustSearchBoxWidth()">
+						<option value="all">All</option>
+						<option value="moviename">Movie Name</option>
+						<option value="director">Director</option>
+						<option value="genre">Genre</option>
+						<option value="celebs">Celebrities</option>
+						<option value="keywords">Keywords</option>
+					</select>
+					<input type="text" id="search-text" name="query" placeholder="Enter your search...">
+					<button type="submit">Search</button>
+				</form>
+			</div>
+			
+			<div class="wishlist">
+                <a href="/watchlater">Watchlist</a>
+            </div>
+	            
+	           <div class="user-links">
+	                
+						<div th:if="${auth.getName() != 'anonymousUser'}" class="auth-on">
+							<h3 style="color:steelblue;">Welcome, <span th:text="${auth.getName()}" style="color: steelblue;"></span>!</h3>
+							<a href="/logout"><h3>Logout</h3></a>
+						</div>
+						<div th:unless="${auth.getName() != 'anonymousUser'}" class="auth-off">
+							<a href="/login">Sign In</a>
+							<span class="divider">|</span>
+	                        <a href="/register">Register</a>
+						</div>
+	                    
+	                
+	           </div>
+	            
+	        </div>
+           </header>
+        <script>   
+            function adjustSearchBoxWidth() {
+                var selectedOption = document.getElementById("search-category");
+                var searchBox = document.getElementById("search-text");
+
+                // Set the width of the search box based on the length of the selected option text
+                selectedOption.style.width = selectedOption.options[selectedOption.selectedIndex].text.length+5 + "ch";
+			
+           }
+        </script>
+		</div>
+		
+	</body>
+</html>
